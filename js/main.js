@@ -10,6 +10,15 @@ var POST_FINDER_TEMPLATE = [
 	'</li>'
 ].join('');
 
+if (POST_FINDER_SEARCH_RESULT == undefined) {
+	var POST_FINDER_SEARCH_RESULT = [
+			'<li data-id="<%= ID %>">',
+				'<a href="#" class="add">Add</a>',
+				'<span><%= post_title %></span>',
+			'</li>'
+		].join('');
+}
+
 (function($) {
 
 	$.postFinder = function(element, options) {
@@ -214,12 +223,7 @@ var POST_FINDER_TEMPLATE = [
 				function(response) {
 					if( typeof response.posts != "undefined" ) {
 						for( var i in response.posts ) {
-							html += _.template([
-								'<li data-id="<%= ID %>" data-permalink="<%= permalink %>">',
-									'<a href="#" class="add">Add</a>',
-									'<span><%= post_title %></span>',
-								'</li>'
-							].join(''), response.posts[i]);
+							html += _.template(POST_FINDER_SEARCH_RESULT, response.posts[i]);
 						}
 						plugin.$results.html(html);
 					}
