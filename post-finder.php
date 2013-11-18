@@ -55,9 +55,21 @@ class NS_Post_Finder {
 			)
 		);
 
+		wp_localize_script(
+			'post-finder',
+			'POST_FINDER_SEARCH_RESULT', 
+			$this->search_result_template()
+		);
+
+		wp_localize_script(
+			'post-finder',
+			'POST_FINDER_TEMPLATE', 
+			$this->search_template()
+		);
+
 		wp_enqueue_style( 'post-finder', plugins_url( 'css/screen.css', __FILE__ ) );
 	}
-	
+
 	/**
 	 * Make sure our nonce is on all admin pages
 	 *
@@ -265,6 +277,41 @@ class NS_Post_Finder {
 			die( json_encode( array( 'posts' => $posts ) ) );
 		
 	}
+
+	/*
+	 * Sets the search result template
+	 *
+	 * @return string The search result template
+	 */
+	public function search_result_template() {
+		$search_result_template = array(
+			'<li data-id="<%= ID %>">',
+				'<a href="#" class="add">' . __( 'Add', 'post-finder' ) . '</a>',
+				'<span><%= post_title %></span>',
+			'</li>'
+		);
+		return implode( '', $search_result_template );
+	}
+
+	/*
+	 * Sets the search form template
+	 *
+	 * @return the search form template
+	 */
+	public function search_template() {
+		$search_template = array(
+		'<li data-id="<%= id %>">',
+			'<input type="text" size="3" maxlength="3" max="3" value="<%= pos %>">',
+			'<span><%= title %></span>',
+			'<nav>',
+				'<a href="<%= edit_url %>" class="icon-pencil" target="_blank" title="' . __( 'Edit', 'post-finder' ) . '"></a>',
+				'<a href="<%= permalink %>" class="icon-eye" target="_blank" title="' . __( 'View', 'post-finder' ) . '"></a>',
+				'<a href="#" class="icon-remove" title="' . __( 'Remove', 'post-finder' ) . '"></a>',
+			'</nav>',
+		'</li>' );
+		return implode( '', $search_template );
+	}
+
 }
 new NS_Post_Finder();
 

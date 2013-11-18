@@ -1,24 +1,3 @@
-if (POST_FINDER_TEMPLATE == undefined) {
-	var POST_FINDER_TEMPLATE = [
-		'<li data-id="<%= id %>">',
-			'<input type="text" size="3" maxlength="3" max="3" value="<%= pos %>">',
-			'<span><%= title %></span>',
-			'<nav>',
-				'<a href="<%= edit_url %>" class="icon-pencil" target="_blank" title="Edit"></a>',
-				'<a href="<%= permalink %>" class="icon-eye" target="_blank" title="View"></a>',
-				'<a href="#" class="icon-remove" title="Remove"></a>',
-			'</nav>',
-		'</li>'
-	].join('');
-}
-if (POST_FINDER_SEARCH_RESULT == undefined) {
-	var POST_FINDER_SEARCH_RESULT = [
-			'<li data-id="<%= ID %>">',
-				'<a href="#" class="add">Add</a>',
-				'<span><%= post_title %></span>',
-			'</li>'
-		].join('');
-}
 
 (function($) {
 
