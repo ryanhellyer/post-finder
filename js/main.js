@@ -187,6 +187,7 @@
 				args = $element.data('args'),
 				data = {
 					action: 'pf_search_posts',
+					post_finder: '1',
 					s: plugin.$query.val(),
 					_ajax_nonce: plugin.nonce
 				};
